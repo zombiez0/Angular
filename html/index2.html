@@ -1,0 +1,83 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="../js/angular.min.js"></script>
+  </head>
+  <body>
+    <div ng-controller="Ctrl" class="">
+        <label>Name:</label>
+        <input ng-model ="name">
+        <input ng-model ="age">
+        <h4>{{age * 2}}</h4>
+        <div>
+              <input type="checkbox" ng-model="mycheck" /><label>Show</label>                 
+        </div>
+        <div ng-show="mycheck">
+            Hello
+        </div>
+        <div>
+            <ul>
+                <li ng-repeat="person in people">{{person.name}} <div ng-show="$first">Fist div</div>
+                  <button ng-click="removeElement($index)">Remove</button>
+
+                </li>     
+            </ul>
+        </div>
+        <div>
+            <input type="text" ng-model="username"/>
+            <button ng-click="addName()">Add Name</button>
+        </div>
+        <div>There are {{people.length}} in the list</div>
+        <div>
+            <input ng-change="phoneNumberChange()" type="text" ng-model="phone_number"/>
+        </div>
+        <div ng-controller="contactsBox">
+            <select ng-change="contactsChange()" ng-model="select_contact_box" ng-options="employee.name for employee in employees">
+                <option value="">Select an employee</option>
+            </select>  
+        </div>
+    </div>
+  </body>
+  <script>
+      var Ctrl = function($scope) {
+          $scope.name = "Chetan";
+          $scope.age = 30;
+          $scope.$watch('age', function() {
+              console.log("do something");
+          });
+
+          $scope.people = [
+            {name : 'Tom', age : 50},
+            {name : 'David', age : 30}
+          ];
+
+          $scope.addName = function() {
+            $scope.people.push({
+                'name' : $scope.username,
+                'age' : 26
+            });
+          };
+
+          $scope.removeElement = function(index) {
+              $scope.people.splice(index,1);
+          };
+
+          $scope.phoneNumberChange = function() {
+            var val = $scope.phone_number;
+              if(isNaN(val)) {
+                console.log("Enter a valid number");
+              }
+          };
+      };
+
+      var contactsBox = function($scope) {
+          $scope.employees = [
+              {name : 'Chetan', id : 25353},
+              {name : 'Anand', id : 25253}
+          ];
+          $scope.contactsChange = function() {
+              console.log($scope.select_contact_box);
+          }
+      };
+  </script>
+</html>

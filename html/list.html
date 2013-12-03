@@ -1,0 +1,12 @@
+<h4>List</h4>
+<div class="contact-list-container">
+	<ul>
+		<li ng-repeat="contact in contacts">
+			<a href="#/contact/{{$index}}">
+				<span>{{contact.name}}</span>
+				<span>{{contact.number}}</span>
+			</a>
+		</li> 
+	</ul>
+	<a href="#/add">Add New Contact</a>
+</div>
